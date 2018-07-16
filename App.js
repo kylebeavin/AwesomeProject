@@ -22,8 +22,10 @@ static navigationOptions = {
 
 class DetailsScreen extends Component {
 
-static navigationOptions = {
-  title: 'Details',
+static navigationOptions = ({ navigation }) => {
+  return {
+    title: navigation.getParam('otherParam', 'A Nested Details Screen'),
+  }
 }
 
   render() {
@@ -38,6 +40,7 @@ const otherParam = navigation.getParam('otherParam', 'some default value');
         <Text>itemId: {JSON.stringify(itemId)}</Text>
         <Text>otherParam: {JSON.stringify(otherParam)}</Text>
         <Button title="Go to Details... again" onPress={() => this.props.navigation.push('Details')} />
+        <Button title="Update the title" onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'})}/>
         <Button title="Go to Home" onPress={() => this.props.navigation.navigate('Home')}/>
         <Button title="Go back" onPress={() => this.props.navigation.goBack()}/>
       </View>
