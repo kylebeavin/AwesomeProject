@@ -3,6 +3,10 @@ import { Button, View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 class HomeScreen extends Component {
+static navigationOptions = {
+  title: 'Home',
+}
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -17,6 +21,11 @@ class HomeScreen extends Component {
 }
 
 class DetailsScreen extends Component {
+
+static navigationOptions = {
+  title: 'Details',
+}
+
   render() {
 
 const { navigation } = this.props;
