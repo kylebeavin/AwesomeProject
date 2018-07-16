@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
-import { createStackNavigator, } from 'react-navigation';
-import { Text, View } from 'react-native';
-import Bananas from './components/Bananas';
-import FixedDimensions from './components/heightandwidth/FixedDimensions';
-import FlexDimensions from './components/heightandwidth/FlexDimensions';
+import { View, Text } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
 class HomeScreen extends Component {
   render() {
     return (
-      <View style={{ flex:1,alignItems: 'center',justifyContent:'center'}}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
       </View>
     );
   }
 }
 
-export default createStackNavigator({
-  Home: {
-    screen: HomeScreen
+class DetailsScreen extends Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+
+const RootStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Details: DetailsScreen,
   },
-});
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+export default class App extends React.Component {
+  render() {
+    return <RootStack />;
+  }
+}
