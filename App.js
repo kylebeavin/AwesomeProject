@@ -1,11 +1,38 @@
 import React, { Component } from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, Image, View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-class HomeScreen extends Component {
-static navigationOptions = {
-  title: 'Home',
+class LogoTitle extends Component {
+  render() {
+    return (
+      <Image source={require('./KoolBuilder.png')} style={{ width:250, height:40}}/>
+    )
+  }
 }
+
+class HomeScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+    headerTitle: <LogoTitle/>, 
+    headerRight: (
+      // <View>
+      // <Button onPress={() => alert('This is a button!')} title="Info"/>
+      <Button onPress={navigation.getParam('increaseCount')} title="+1"/>
+      // </View> 
+    )}
+  };
+
+  componentDidMount() {
+    this.props.navigation.setParams({increaseCount: this._increaseCount})
+  }
+
+  state = {
+    count: 0,
+  };
+
+  _increaseCount = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
 
   render() {
     return (
@@ -21,7 +48,6 @@ static navigationOptions = {
 }
 
 class DetailsScreen extends Component {
-
 static navigationOptions = ({ navigation }) => {
   return {
     title: navigation.getParam('otherParam', 'A Nested Details Screen'),
@@ -55,6 +81,15 @@ const RootStack = createStackNavigator(
   },
   {
     initialRouteName: 'Home',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   }
 );
 
